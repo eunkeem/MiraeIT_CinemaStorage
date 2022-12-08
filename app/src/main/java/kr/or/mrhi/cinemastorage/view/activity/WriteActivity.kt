@@ -50,6 +50,7 @@ class WriteActivity : AppCompatActivity() {
         }
     }
 
+    /*firebase realtimeDB에서 sharedpreference에 저장된 키값과 같은 키의 유저 데이터를 받음*/
     private fun setUserNickname() {
         val userDAO = UserDAO()
         userDAO.databaseReference?.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -71,6 +72,7 @@ class WriteActivity : AppCompatActivity() {
         })
     }
 
+    /*glide를 이용하여 리뷰입력창에 영화의 정보들을 셋팅*/
     private fun setCinemaInfo() {
         val extras = intent.extras
         extras?.getString(MOVIE_BACKDROP)?.let { backdrop ->
@@ -88,6 +90,8 @@ class WriteActivity : AppCompatActivity() {
         binding.ratingBarCinema.rating = extras?.getFloat(MOVIE_RATING, 0f)?.div(2)!!
     }
 
+    /*사용자가 입력한 리뷰를 firebase realtimeDB에 저장
+    * 유저의 키값을 별도로 저장해두어 유저별로 검색하기 쉽도록 함*/
     private fun setCinemaReview() {
         binding.btnWrite.setOnClickListener {
             val key = SharedPreferences.getToken(applicationContext)

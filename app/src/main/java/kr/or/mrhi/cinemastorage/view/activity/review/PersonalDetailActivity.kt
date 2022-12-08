@@ -33,7 +33,7 @@ class PersonalDetailActivity : AppCompatActivity() {
             finish()
         }
     }
-
+    /*리스트에서 아이템을 클릭하면서 실행한 intent.putExtra로 해당영화 데이터 넘겨받음*/
     private fun getReviewDetail() {
         val extras = intent.extras
         if (extras != null) setReviewDetail(extras)

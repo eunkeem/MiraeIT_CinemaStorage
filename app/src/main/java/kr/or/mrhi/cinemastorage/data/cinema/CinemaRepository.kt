@@ -11,6 +11,9 @@ object CinemaRepository {
 
     private val cinemaApi: CinemaAPI
 
+    /*CinemaAPI인터페이스를 구현한 retrofit 서비스 객체 생성
+    .addConverterFactory함수로 데이터파싱설정
+     GsonConverterFactory를 이용해 api의 JSON을 인코딩*/
     init {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://api.themoviedb.org/3/")
@@ -20,6 +23,8 @@ object CinemaRepository {
         cinemaApi = retrofit.create(CinemaAPI::class.java)
     }
 
+    /*해당API의 객체를 얻어 enqueue함수를 호출
+    *onSuccess 매개변수를 람다로 정의해두고 onResponse오버라이딩해서 통신이 성공했을경우 invoke함수로 실행*/
     fun getPopularCinema(
         page: Int = 1,
         onSuccess: (cinema: List<Cinema>) -> Unit,

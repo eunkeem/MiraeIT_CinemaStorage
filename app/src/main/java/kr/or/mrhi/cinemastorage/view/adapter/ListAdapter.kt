@@ -20,10 +20,12 @@ class ListAdapter(
             Glide.with(itemView.context).load("https://image.tmdb.org/t/p/w342${data.poster}")
                 .into(binding.ivPoster)
 
+            /*invoke함수로 람다 호출*/
             itemView.setOnClickListener { onCinemaClick.invoke(data) }
         }
     }
 
+    /*api로 받은 영화 정보를 리스트에 업데이트*/
     fun updateCinema(cinemaList: List<Cinema>) {
         this.cinemaList = cinemaList
         notifyDataSetChanged()

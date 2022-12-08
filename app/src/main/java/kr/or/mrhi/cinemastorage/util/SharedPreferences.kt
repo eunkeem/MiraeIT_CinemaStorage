@@ -7,6 +7,8 @@ class SharedPreferences {
         private const val PREF_NAME = "CINEMA_STORAGE"
         private const val TOKEN = "TOKEN"
 
+        /*saredPreferences에 넣기, 읽어오기, 지우기 함수 정의 해둠*/
+
         fun setToken(context: Context, token: String) {
             val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
             pref.edit().putString(TOKEN, token).apply()

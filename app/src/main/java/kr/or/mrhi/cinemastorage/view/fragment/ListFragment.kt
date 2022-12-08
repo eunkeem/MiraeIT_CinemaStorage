@@ -29,6 +29,7 @@ class ListFragment : Fragment() {
 
     private val cinemaList = listOf<Cinema>()
 
+    /*어댑터에서 람다식으로 표현해두고 itemview클릭하면 invoke함수로 해당 함수를 호출*/
     private val popularAdapter = ListAdapter(cinemaList) { cinema -> showCinemaDetail(cinema) }
 
     private val topRatedAdapter = ListAdapter(cinemaList) { cinema -> showCinemaDetail(cinema) }
@@ -54,6 +55,7 @@ class ListFragment : Fragment() {
         return binding.root
     }
 
+    /*인텐트로 영화 정보를 putExtra*/
     private fun showCinemaDetail(cinema: Cinema) {
         val intent = Intent(requireContext(), ListDetailActivity::class.java)
         intent.putExtra(MOVIE_BACKDROP, cinema.backdrop)
@@ -65,6 +67,7 @@ class ListFragment : Fragment() {
         startActivity(intent)
     }
 
+    /*api 로 정보를 성공적으로 불러왔을 경우 어댑터에 데이터리스트를 업데이트 하도록함*/
     private fun getPopularCinema() {
         CinemaRepository.getPopularCinema(onSuccess = ::onPopularCinemaFetched, onError = ::onError)
     }
@@ -102,15 +105,17 @@ class ListFragment : Fragment() {
         ).show()
     }
 
+    /*videoView자리에 재생하려는 비디오의 URI로 샛팅. */
     private fun setVideoView() {
         binding.videoView.apply {
             setVideoURI(Uri.parse("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"))
-            requestFocus()
-            setOnPreparedListener { start() }
-            setOnCompletionListener { start() }
+            requestFocus() /*파일 재생 준비*/
+            setOnPreparedListener { start() } /*재생가능한 상태로 로딩되면 시작*/
+            setOnCompletionListener { start() } /*미디어 재생 완료되었을때 시작*/
         }
     }
 
+    /*리사이클러뷰를 horizontal로 셋팅*/
     private fun setRecyclerView(recyclerView: RecyclerView, listAdapter: ListAdapter) {
         recyclerView.apply {
             adapter = listAdapter
@@ -120,6 +125,7 @@ class ListFragment : Fragment() {
         }
     }
 
+    /*액티비티 생명주기별로 비디오 재생상태를 설정*/
     override fun onResume() {
         super.onResume()
         binding.videoView.apply {
