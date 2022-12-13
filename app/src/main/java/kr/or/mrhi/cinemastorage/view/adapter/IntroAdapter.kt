@@ -23,7 +23,7 @@ class IntroAdapter(private val context: Context) : PagerAdapter() {
     override fun getCount(): Int {
         return banners.size
     }
-    /*PagerAdapter() 를상속받아 오버라이딩한 함수. veiw 객체를 만들어 리턴.*/
+    /*PagerAdapter() 를상속받아 오버라이딩한 함수. veiw 객체 동일 여부 판별.*/
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view === `object` as View
     }
